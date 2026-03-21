@@ -1,0 +1,32 @@
+[
+  {
+    "id": "S101",
+    "name": "Nike",
+    "category": "Clothing",
+    "description": "Athletic apparel and footwear.",
+    "status": "Open",
+    "x": 150,
+    "y": 200,
+    "level": 1
+  },
+  {
+    "id": "S102",
+    "name": "Starbucks",
+    "category": "Food & Beverage",
+    "description": "Coffee, tea, and pastries.",
+    "status": "Busy",
+    "x": 350,
+    "y": 400,
+    "level": 1
+  },
+  {
+    "id": "S103",
+    "name": "Apple Store",
+    "category": "Electronics",
+    "description": "Phones, computers, and tech support.",
+    "status": "Open",
+    "x": 600,
+    "y": 250,
+    "level": 1
+  }
+]
