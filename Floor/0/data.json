@@ -1,0 +1,26 @@
+[
+  {
+    "id": "S101",
+    "name": "Nike",
+    "lot": "G-01",
+    "description": "",
+    "category": "Retail",
+    "status": "Open",
+    "x": 150,
+    "y": 142,
+    "spriteX": 240,
+    "spriteY": 0
+  },
+  {
+    "id": "S102",
+    "name": "Starbucks",
+    "lot": "G-02",
+    "description": "",
+    "category": "Retail",
+    "status": "Open",
+    "x": 352,
+    "y": 499,
+    "spriteX": 360,
+    "spriteY": 0
+  }
+]

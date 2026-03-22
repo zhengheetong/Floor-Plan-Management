@@ -1,0 +1,14 @@
+[
+  {
+    "id": "S101",
+    "name": "TGV",
+    "lot": "L1-001",
+    "description": "",
+    "category": "Retail",
+    "status": "Open",
+    "x": 623,
+    "y": 145,
+    "spriteX": 480,
+    "spriteY": 0
+  }
+]
