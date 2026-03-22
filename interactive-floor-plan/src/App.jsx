@@ -21,7 +21,7 @@ export default function App() {
   useEffect(() => {
     if (!activeFloor) return; // Guard clause
 
-    fetch(`/Floor/${activeFloor}/data.json`)
+    fetch(`${import.meta.env.BASE_URL}Floor/${activeFloor}/data.json`)
       .then(response => {
         if (!response.ok) throw new Error("Data not found");
         return response.json();

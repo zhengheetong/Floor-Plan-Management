@@ -8,7 +8,7 @@ export default function Map({ activeFloor, stores, selectedStore, onStoreSelect 
         Because it's in the public folder, this path works perfectly.
       */}
       <image 
-        href={`/Floor/${activeFloor}/map.png`} 
+        href={`${import.meta.env.BASE_URL}Floor/${activeFloor}/map.png`} 
         width="800" 
         height="600" 
         preserveAspectRatio="xMidYMid slice"
