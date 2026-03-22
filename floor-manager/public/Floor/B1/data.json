@@ -1,26 +1,26 @@
 [
   {
     "id": "S101",
-    "name": "Nike",
-    "lot": "G-01",
+    "name": "McDonald",
+    "lot": "B1 - 001",
     "description": "",
     "category": "Retail",
     "status": "Open",
-    "x": 150,
-    "y": 142,
-    "spriteX": 240,
+    "x": 78,
+    "y": 479,
+    "spriteX": 120,
     "spriteY": 0
   },
   {
     "id": "S102",
-    "name": "Starbucks",
-    "lot": "G-02",
+    "name": "KFC",
+    "lot": "B1-11",
     "description": "",
     "category": "Retail",
     "status": "Open",
-    "x": 352,
-    "y": 499,
-    "spriteX": 360,
+    "x": 708,
+    "y": 485,
+    "spriteX": 0,
     "spriteY": 0
   }
 ]

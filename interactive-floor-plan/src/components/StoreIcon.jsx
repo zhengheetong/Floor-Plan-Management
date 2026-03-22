@@ -1,23 +1,37 @@
-// src/components/StoreIcon.jsx
 export default function StoreIcon({ spriteX, spriteY, name }) {
-  const iconSize = 64; // The standard size we will use for all logos
+  // 1. Update the base size to match your new Python output exactly
+  const baseSize = 120; 
+  
+  // 2. We can drop the scale back down to 1 (or 0.8 if 120px feels TOO huge in the sidebar)
+  const scale = 1;   
+  const finalSize = baseSize * scale;
+
+  const hasSprite = spriteX !== undefined && spriteY !== undefined;
 
   return (
-    <div 
-      title={name}
-      style={{
-        width: `${iconSize}px`,
-        height: `${iconSize}px`,
-        // We will put the actual sprite sheet in the public folder later
-        backgroundImage: `url('/icons-sprite.png')`, 
-        backgroundRepeat: 'no-repeat',
-        // Shift the image negatively to frame the correct icon
-        backgroundPosition: `-${spriteX}px -${spriteY}px`,
-        backgroundColor: '#f1f5f9', // Placeholder background color
-        borderRadius: '12px',
-        border: '1px solid #e2e8f0',
-        boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
-      }} 
-    />
+    <div style={{ width: `${finalSize}px`, height: `${finalSize}px` }}>
+      <div 
+        title={name}
+        style={{
+          width: `${baseSize}px`,
+          height: `${baseSize}px`,
+          backgroundImage: hasSprite ? `url('/icons-sprite.png')` : 'none',
+          backgroundPosition: `-${spriteX}px -${spriteY}px`,
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: '#f8fafc',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '36px', // Bumped up the fallback font size too
+          fontWeight: 'bold',
+          color: '#94a3b8',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+          transform: `scale(${scale})`,
+          transformOrigin: 'top left'
+        }}
+      >
+        {!hasSprite && name ? name.charAt(0).toUpperCase() : ''}
+      </div>
+    </div>
   );
 }
