@@ -66,6 +66,29 @@ This project uses a "Local Staging" architecture. You make changes in the Python
 5. **Publish:** Click `EXPORT TO WEB` and select the interactive-floor-plan/public folder. All your hard work will instantly sync to the React app!
 
 ---
+## 🖥️ The Admin Dashboard Interface
+The Python CMS is designed with a clean, three-column layout to make managing your mall data as intuitive as possible:
+
+<img src="Admin_Dashboard.png" alt="Admin_Dashboard" width="50%"/>
+
+### 1. The Control Panel (Left Sidebar)
+This is your main command center for managing files and exporting your project.
+* **Local Floors:** Add new floor plans and quickly toggle between active levels (e.g., Ground Floor, Level 1).
+* **Assets Library:** Upload individual .png logos. Clicking **Generate Sprites** automatically stitches them together and calculates the CSS coordinates for the web app.
+* **Production:** The **Export to Web** button is your deployment tool. It takes all your local maps, pins, and generated sprites and instantly copies them to your React project.
+
+### 2. The Visual Map Editor (Center Canvas)
+A live, interactive view of your uploaded floor plan blueprint.
+* **Ghost Pinning:** Clicking anywhere on the map drops a temporary yellow marker to preview a store's location.
+* **Live Updates:** Once a store is confirmed, it turns into a permanent blue pin. You can click any existing blue pin to reopen and edit its data.
+
+### 3. The Data Entry Form (Right Sidebar)
+This panel dynamically changes based on what you are doing on the map.
+* **Status Indicator:** Shows whether you are in ADDING NEW mode, EDITING mode, or just IDLE.
+* **Store Details:** Text fields to input the Store Name, Lot Number, and a brief description.
+* **Safety Saves:** Actions are held in temporary memory until you click **Save Pins**, preventing accidental deletions or unwanted changes from instantly ruining your data files.
+
+---
 
 ## 🌐 Deployment
 This project is configured to deploy easily to GitHub pages using the gh-pages package.

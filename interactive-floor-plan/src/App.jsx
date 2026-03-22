@@ -11,7 +11,7 @@ export default function App() {
 
   // 1. Fetch the master configuration on app load
   useEffect(() => {
-    fetch('/Floor/floors.json')
+    fetch(`${import.meta.env.BASE_URL}Floor/floors.json`)
       .then(response => response.json())
       .then(data => setFloorConfig(data))
       .catch(error => console.error("Error loading floor config:", error));

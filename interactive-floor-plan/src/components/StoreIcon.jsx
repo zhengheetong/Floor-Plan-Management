@@ -15,7 +15,7 @@ export default function StoreIcon({ spriteX, spriteY, name }) {
         style={{
           width: `${baseSize}px`,
           height: `${baseSize}px`,
-          backgroundImage: hasSprite ? `url('/icons-sprite.png')` : 'none',
+          backgroundImage: hasSprite ? `url('${import.meta.env.BASE_URL}icons-sprite.png')` : 'none',
           backgroundPosition: `-${spriteX}px -${spriteY}px`,
           backgroundRepeat: 'no-repeat',
           backgroundColor: '#f8fafc',
