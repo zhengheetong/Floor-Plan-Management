@@ -1,0 +1,63 @@
+/* =========================================
+   APP SHELL & STRUCTURAL LAYOUT
+========================================= */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* =========================================
+   HEADER BAR
+========================================= */
+.app-header {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background: var(--bg-header);
+  border-bottom: 2px solid var(--border-light);
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  /* Gradient text using navy and ocean blues */
+  background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+/* =========================================
+   MAIN CONTENT LAYOUT (Map + Sidebar)
+========================================= */
+.main-layout {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+/* =========================================
+   MAP CANVAS AREA
+========================================= */
+.map-container {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.map-svg {
+  width: 100%;
+  height: 100%;
+  max-height: 90vh;
+  transition: transform 0.3s ease;
+}

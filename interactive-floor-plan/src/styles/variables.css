@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* =========================================
+   GLOBAL CSS VARIABLES
+   Soft & Soothing Sky-Blue / Ocean Palette
+========================================= */
+:root {
+  /* Background Colors */
+  --bg-main: #e0f2fe; /* Soft sky blue behind the map */
+  --bg-header: #bae6fd; /* Deeper pastel blue for the header */
+  --bg-sidebar: #f0f9ff; /* Faint cool blue for the sidebar */
+  --bg-card: #ffffff; /* Pure white for the map paper itself */
+
+  /* Accent Colors */
+  --accent-blue: #0284c7; /* Ocean blue for active buttons */
+  --accent-hover: #0369a1; /* Deeper ocean for hover states */
+
+  /* Text Colors */
+  --text-main: #0c4a6e; /* Deep navy (easier on the eyes than black) */
+  --text-muted: #0369a1; /* Medium blue for secondary text */
+
+  /* Borders */
+  --border-light: #7dd3fc; /* Soft colorful border instead of gray */
+
+  /* Shadows (tinted blue for a richer feel) */
+  --shadow-sm: 0 1px 2px 0 rgb(2 132 199 / 0.15);
+  --shadow-md: 0 4px 6px -1px rgb(2 132 199 / 0.15);
+  --shadow-lg: 0 10px 15px -3px rgb(2 132 199 / 0.15);
+  --shadow-sidebar: -10px 0 20px -5px rgb(2 132 199 / 0.15);
+
+  /* Layout */
+  --sidebar-width: 420px;
+}
+
+/* =========================================
+   GLOBAL RESET & BASE STYLES
+========================================= */
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
