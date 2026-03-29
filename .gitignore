@@ -1,4 +1,4 @@
-floor-manager/Map_B1_FoodCourt.png
-floor-manager/Map_Ground_Floor.png
-floor-manager/generate_maps.py
-floor-manager/Map_Level_1.png
+# Ignore everything inside floor-manager...
+floor-manager/*
+# ...except the main admin tool itself
+!floor-manager/mapper.py

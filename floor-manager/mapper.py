@@ -5,9 +5,6 @@ import json
 import os
 import shutil
 
-from core.assets import generate_sprite_sheet as _generate_sprite_sheet
-from core.exporter import export_to_web
-
 # --- CONFIGURATION ---
 BASE_DIR = "public/Floor"
 SPRITE_DIR = "SpriteLibrary"  # New Default Logo Folder
@@ -274,16 +271,74 @@ class MapperApp:
                 parent=self.root)
 
     def generate_sprite_sheet(self):
-        # --- Delegates heavy PIL + JSON logic to core.assets ---
-        success, msg, _ = _generate_sprite_sheet(
-            SPRITE_DIR, BASE_DIR, self.floor_config
-        )
-        if success:
-            if self.active_floor_folder:
-                self.load_floor_map()
-            messagebox.showinfo("Success", msg)
-        else:
-            messagebox.showwarning("No Images", msg)
+        ICON_SIZE = 120
+        COLUMNS = 10
+
+        valid_exts = {'.png', '.jpg', '.jpeg'}
+        images = [f for f in os.listdir(SPRITE_DIR)
+                  if os.path.splitext(f)[1].lower() in valid_exts]
+
+        if not images:
+            messagebox.showwarning(
+                "No Images",
+                "The Sprite Library is empty. Upload some logos first!")
+            return
+
+        rows = (len(images) + COLUMNS - 1) // COLUMNS
+        sprite_w = COLUMNS * ICON_SIZE
+        sprite_h = rows * ICON_SIZE
+
+        master_img = Image.new("RGBA", (sprite_w, sprite_h), (255, 255, 255, 0))
+        logo_mapping = {}
+
+        for idx, filename in enumerate(images):
+            filepath = os.path.join(SPRITE_DIR, filename)
+            try:
+                img = Image.open(filepath).convert("RGBA")
+                img = img.resize((ICON_SIZE, ICON_SIZE), Image.Resampling.LANCZOS)
+
+                col = idx % COLUMNS
+                row = idx // COLUMNS
+                x = col * ICON_SIZE
+                y = row * ICON_SIZE
+
+                master_img.paste(img, (x, y))
+
+                name_without_ext = os.path.splitext(filename)[0].lower().strip()
+                logo_mapping[name_without_ext] = {"x": x, "y": y}
+            except Exception as e:
+                print(f"Failed to process {filename}: {e}")
+
+        # Save to public folder so React can see it
+        sprite_path = os.path.join("public", "icons-sprite.png")
+        master_img.save(sprite_path)
+
+        updated_count = 0
+        for floor in self.floor_config:
+            data_path = os.path.join(BASE_DIR, floor['folder'], "data.json")
+            if os.path.exists(data_path):
+                with open(data_path, "r") as f:
+                    floor_stores = json.load(f)
+
+                changed = False
+                for s in floor_stores:
+                    store_name_lower = s['name'].lower().strip()
+                    if store_name_lower in logo_mapping:
+                        s['spriteX'] = logo_mapping[store_name_lower]['x']
+                        s['spriteY'] = logo_mapping[store_name_lower]['y']
+                        changed = True
+                        updated_count += 1
+
+                if changed:
+                    with open(data_path, "w") as f:
+                        json.dump(floor_stores, f, indent=2)
+
+        if self.active_floor_folder:
+            self.load_floor_map()
+
+        messagebox.showinfo(
+            "Success",
+            f"Sprite Sheet generated!\n\nLinked {updated_count} logos to stores on the map.")
 
     # --- WIZARD & EXPORT LOGIC ---
     def add_floor_wizard(self):
@@ -333,7 +388,6 @@ class MapperApp:
                 parent=self.root)
 
     def export_project(self):
-        # --- Delegates file copy logic to core.exporter ---
         self.save_data()
         messagebox.showinfo(
             "Export",
@@ -342,11 +396,26 @@ class MapperApp:
             title="Select React 'public' Folder")
         if not target_web_dir:
             return
-        success, msg = export_to_web(BASE_DIR, target_web_dir)
-        if success:
-            messagebox.showinfo("Export Successful", msg)
-        else:
-            messagebox.showerror("Export Failed", msg)
+
+        dest_floor_path = os.path.join(target_web_dir, "Floor")
+        dest_sprite_img = os.path.join(target_web_dir, "icons-sprite.png")
+
+        try:
+            # Copy all floor subdirectories (map.png + data.json per floor)
+            shutil.copytree(BASE_DIR, dest_floor_path, dirs_exist_ok=True)
+
+            # Copy the generated sprite sheet if it exists
+            local_sprite_img = os.path.join("public", "icons-sprite.png")
+            if os.path.exists(local_sprite_img):
+                shutil.copy(local_sprite_img, dest_sprite_img)
+
+            messagebox.showinfo(
+                "Export Successful",
+                "All map data and sprites exported!\nRefresh your website to see changes.")
+        except Exception as e:
+            messagebox.showerror(
+                "Export Failed",
+                f"An error occurred:\n{str(e)}")
 
 
     def load_master_config(self):
